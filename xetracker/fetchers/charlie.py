@@ -1,23 +1,26 @@
-import urllib2
-from lxml import etree
+import sys
 import logging
 import datetime
-import sys
+
+import urllib2
+from lxml import etree
+
+from xetracker.model import currency_conversion 
 
 class CharlieFetcher:
   def fetch(self):
     str_catalog = urllib2.urlopen("http://charliescurrency.ca/rateswithcss.xml").read()
-    return new CharlieTransformer(str_catalog)
+    return CharlieTransformer().transform(str_catalog)
 
 class CharlieTransformer:
-  def tranform(self, xml_string):
+  def transform(self, xml_string):
     catalog = etree.XML(xml_string)
 
     currency_conversions = list()
     timestamp_timestamp = None
     for el in catalog:
       if (el.tag == 'TIMESTAMP'):
-        timestamp_datetime = self.__extract_timestamp(el.text)
+        timestamp_datetime = self.__extract_timestamp(el)
       elif (el.tag == 'RATE'):
         currency_conversions.append(self.__extract_conversion(el, timestamp_datetime))
       else:
@@ -29,7 +32,7 @@ class CharlieTransformer:
     from_currency_str = self.__find_tag_value(rate_element, 'ISO')
     provider_selling_rate = self.__find_tag_value(rate_element, 'WESELL')
     provider_buying_rate = self.__find_tag_value(rate_element, 'WEBUY')
-    return CurrencyConversion('CHARLIE', from_currency_str, 'CAD', provider_selling_rate, provider_buying_rate, timestamp_datetime)
+    return currency_conversion.CurrencyConversion('CHARLIE', from_currency_str, 'CAD', provider_selling_rate, provider_buying_rate, timestamp_datetime)
 
   def __find_tag_value(self, element, tag_name):
     for child_element in element:
@@ -39,9 +42,10 @@ class CharlieTransformer:
 
   def __extract_timestamp(self, timestamp_element):
     try:
-      timestamp_str = timestamp_element.tag
+      timestamp_str = timestamp_element.text
       timstamp_parts = timestamp_str.split(' ')
       return datetime.strptime('{} {} {}'.format(timestamp_parts[3], timestamp_parts[5], timestamp_parts[6]))
     except:
-      logging.error('Unable convert timestamp element: {}'.format(sys.exc_info[0]))
-      return datetime.datetime.now('PST')
+      e = sys.exc_info()[0]
+      logging.error('Unable convert timestamp element: {}'.format(e))
+      return datetime.datetime.now()

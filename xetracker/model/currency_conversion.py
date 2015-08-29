@@ -1,5 +1,5 @@
 
-class CurrencyConvertion:
+class CurrencyConversion:
   def __init__(self, provider, currency_from, currency_to, provider_selling_rate, provider_buying_rate, conversion_time):
     self.provider = provider
     self.currency_from = currency_from
