@@ -13,15 +13,24 @@ class CharlieFetcher:
     return CharlieTransformer().transform(str_catalog)
 
 class CharlieTransformer:
+
+  TIMESTAMP_TAG = 'TIMESTAMP'
+  RATE_TAG = 'RATE'
+  ISO_TAG = 'ISO'
+  WESELL_TAG = 'WESELL'
+  WEBUY_TAG = 'WEBUY'
+  CHARLIE_PROVIDER = 'CHARLIE'
+  CAD = 'CAD'
+
   def transform(self, xml_string):
     catalog = etree.XML(xml_string)
 
     currency_conversions = list()
     timestamp_timestamp = None
     for el in catalog:
-      if (el.tag == 'TIMESTAMP'):
+      if (el.tag == self.TIMESTAMP_TAG):
         timestamp_datetime = self.__extract_timestamp(el)
-      elif (el.tag == 'RATE'):
+      elif (el.tag == self.RATE_TAG):
         currency_conversions.append(self.__extract_conversion(el, timestamp_datetime))
       else:
         logging.warning('{} tag is unknown'.format(el.tag))
@@ -29,13 +38,13 @@ class CharlieTransformer:
     return currency_conversions
 
   def __extract_conversion(self, rate_element, timestamp_datetime):
-    from_currency_str = self.__find_tag_value(rate_element, 'ISO')
-    provider_selling_rate = self.__find_tag_value(rate_element, 'WESELL')
-    provider_buying_rate = self.__find_tag_value(rate_element, 'WEBUY')
+    from_currency_str = self.__find_tag_value(rate_element, self.ISO_TAG)
+    provider_selling_rate = self.__find_tag_value(rate_element, self.WESELL_TAG)
+    provider_buying_rate = self.__find_tag_value(rate_element, self.WEBUY_TAG)
     return currency_conversion.CurrencyConversion(
-        'CHARLIE',
+        self.CHARLIE_PROVIDER,
         from_currency_str,
-        'CAD',
+        self.CAD,
         provider_selling_rate,
         provider_buying_rate,
         timestamp_datetime)
