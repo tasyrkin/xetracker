@@ -32,7 +32,13 @@ class CharlieTransformer:
     from_currency_str = self.__find_tag_value(rate_element, 'ISO')
     provider_selling_rate = self.__find_tag_value(rate_element, 'WESELL')
     provider_buying_rate = self.__find_tag_value(rate_element, 'WEBUY')
-    return currency_conversion.CurrencyConversion('CHARLIE', from_currency_str, 'CAD', provider_selling_rate, provider_buying_rate, timestamp_datetime)
+    return currency_conversion.CurrencyConversion(
+        'CHARLIE',
+        from_currency_str,
+        'CAD',
+        provider_selling_rate,
+        provider_buying_rate,
+        timestamp_datetime)
 
   def __find_tag_value(self, element, tag_name):
     for child_element in element:
@@ -42,9 +48,8 @@ class CharlieTransformer:
 
   def __extract_timestamp(self, timestamp_element):
     try:
-      timestamp_str = timestamp_element.text
-      timstamp_parts = timestamp_str.split(' ')
-      return datetime.strptime('{} {} {}'.format(timestamp_parts[3], timestamp_parts[5], timestamp_parts[6]))
+      timestamp_parts = timestamp_element.text.split(' ')
+      return datetime.datetime.strptime('{} {}'.format(timestamp_parts[3], timestamp_parts[5]), '%m/%d/%Y %H:%M:%S')
     except:
       e = sys.exc_info()[0]
       logging.error('Unable convert timestamp element: {}'.format(e))
