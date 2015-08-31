@@ -1,6 +1,7 @@
 import sys
 import logging
 import datetime
+from decimal import *
 
 import urllib2
 from lxml import etree
@@ -45,8 +46,8 @@ class CharlieTransformer:
         self.CHARLIE_PROVIDER,
         from_currency_str,
         self.CAD,
-        provider_selling_rate,
-        provider_buying_rate,
+        Decimal(provider_selling_rate),
+        Decimal(provider_buying_rate),
         timestamp_datetime)
 
   def __find_tag_value(self, element, tag_name):
