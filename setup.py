@@ -16,19 +16,20 @@ class CleanCommand(Command):
     os.system("rm -vrf ./build ./dist ./*.pyc ./*.tar.gz ./*.egg-info")
 
 config = {
+  "name": "xetracker",
   "description": "Track the rates of the foreign currency traders",
   "author": "tasyrkin",
   "url": "https://github.com/tasyrkin/xetracker",
-  "download_url": "https://github.com/tasyrkin/xetracker",
   "author_email": "tasyrkin@gmail.com",
-  "version": "0.1",
-  "install_requires": ["nose", "lxml", "urllib2", "psycopg2"],
-  "packages": ["xetracker", "xetracker.model"],
-  "scripts": [],
-  "name": "xetracker",
+  "version": "0.1.4",
+  "install_requires": ["lxml", "psycopg2"],
+  "packages": ["xetracker", "xetracker.model", "xetracker.persistance", "xetracker.fetchers"],
+  "scripts": ["bin/xetracker"],
   "cmdclass": {
     "clean": CleanCommand
-  }
+  },
+  "test_suite": 'nose.collector',
+  "tests_require": ['nose']
 }
 
 setup(**config)
