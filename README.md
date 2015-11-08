@@ -44,3 +44,9 @@ Install postgresql on your OS. On Debian Linux the steps for installing postgres
 From the project root run
 
 `nosetests`
+
+# Access database
+
+```su timofeya
+psql -p 5434  -d xe
+```
