@@ -1,5 +1,8 @@
 # python binaries
 *.pyc
+build
+dist
+xetracker.egg-info
 
 # vim temporary files
 *.swp

@@ -3,13 +3,17 @@ xetracker gathers information from foreign currency exchange traders and stores 
 
 # Installation
 
-Install `xetracker` via pip
+## via pip
 
-```pip install xetracker```
+`pip install xetracker`
 
 xetracker depends on `lxml` and `psycopg2`. In case of problems installing these dependencies try
 
 `sudo apt-get install python-dev libxml2-dev libxslt-dev` to fix `lxml` installation issues
+
+## via setup.py
+
+`sudo python setup.py install`
 
 # Configure postgresql
 

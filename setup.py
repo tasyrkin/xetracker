@@ -21,7 +21,7 @@ config = {
   "author": "tasyrkin",
   "url": "https://github.com/tasyrkin/xetracker",
   "author_email": "tasyrkin@gmail.com",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "install_requires": ["lxml", "psycopg2"],
   "packages": ["xetracker", "xetracker.model", "xetracker.persistance", "xetracker.fetchers"],
   "scripts": ["bin/xetracker"],
