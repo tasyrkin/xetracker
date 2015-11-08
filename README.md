@@ -49,5 +49,5 @@ From the project root run
 
 ```
 su timofeya
-psql -p 5434  -d xe
+psql -p 5434 -d xe
 ```
