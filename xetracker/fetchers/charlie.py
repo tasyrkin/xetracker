@@ -30,6 +30,7 @@ class CharlieTransformer:
     timestamp_timestamp = None
     for el in catalog:
       if (el.tag == self.TIMESTAMP_TAG):
+        print (el.text)
         timestamp_datetime = self.__extract_timestamp(el)
       elif (el.tag == self.RATE_TAG):
         currency_conversions.append(self.__extract_conversion(el, timestamp_datetime))
@@ -58,9 +59,20 @@ class CharlieTransformer:
 
   def __extract_timestamp(self, timestamp_element):
     try:
+      # Incoming string is 'Rates updated on 11/07/15 at 23:46:50 PST'
+      # therefore date is on idx=3, time is on idx=5
       timestamp_parts = timestamp_element.text.split(' ')
-      return datetime.datetime.strptime('{} {}'.format(timestamp_parts[3], timestamp_parts[5]), '%m/%d/%Y %H:%M:%S')
+      date = timestamp_parts[3]
+      time = timestamp_parts[5]
+      date_time = '{} {}'.format(date, time)
+
+      time_format = '%H:%M:%S'
+
+      try:
+        return datetime.datetime.strptime(date_time, '%m/%d/%Y {}'.format(time_format))
+      except:
+        return datetime.datetime.strptime(date_time, '%m/%d/%y {}'.format(time_format))
     except:
       e = sys.exc_info()[0]
-      logging.error('Unable convert timestamp element: {}'.format(e))
+      logging.error('Unable convert timestamp element: {}, {}'.format(e, timestamp_element.text))
       return datetime.datetime.now()

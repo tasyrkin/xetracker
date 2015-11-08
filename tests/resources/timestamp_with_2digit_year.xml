@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/css" href="currency_table_widget.css"?>
+<CATALOG>
+<TIMESTAMP>Rates updated on 8/29/15 at 06:03:56 PST</TIMESTAMP>
+
+<RATE>
+<ISFLAGGED>*</ISFLAGGED>
+<FLAGURL>flags/USD.gif</FLAGURL>
+<ISO>USD</ISO>
+<NAME>Dollars</NAME>
+<COUNTRY>United States of America</COUNTRY>
+<WEBUY>1.3098</WEBUY>
+<WESELL>1.327</WESELL>
+<INVBUY>0.7635</INVBUY>
+<INVSELL>0.7536</INVSELL>
+</RATE>
+<RATE>
+<ISFLAGGED>*</ISFLAGGED>
+<FLAGURL>flags/AUD.gif</FLAGURL>
+<ISO>AUD</ISO>
+<NAME>Dollars</NAME>
+<COUNTRY>Australia</COUNTRY>
+<WEBUY>0.9308</WEBUY>
+<WESELL>0.9555</WESELL>
+<INVBUY>1.0743</INVBUY>
+<INVSELL>1.0466</INVSELL>
+</RATE>
+</CATALOG>
