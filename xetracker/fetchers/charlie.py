@@ -30,7 +30,6 @@ class CharlieTransformer:
     timestamp_timestamp = None
     for el in catalog:
       if (el.tag == self.TIMESTAMP_TAG):
-        print (el.text)
         timestamp_datetime = self.__extract_timestamp(el)
       elif (el.tag == self.RATE_TAG):
         currency_conversions.append(self.__extract_conversion(el, timestamp_datetime))

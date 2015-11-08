@@ -18,11 +18,9 @@ def test_transform_timestamp_and_rates_charlie():
 
   assert_equal(2, len(conversions))
   expected_usd2cad = currency_conversion.CurrencyConversion('CHARLIE', 'USD', 'CAD', Decimal('1.327'), Decimal('1.3098'), datetime.datetime.strptime('8/29/2015 06:03:56', '%m/%d/%Y %H:%M:%S'))
-  print (conversions[0])
   assert_equal(conversions[0], expected_usd2cad)
 
   expected_aud2cad = currency_conversion.CurrencyConversion('CHARLIE', 'AUD', 'CAD', Decimal('0.9555'), Decimal('0.9308'), datetime.datetime.strptime('8/29/2015 06:03:56', '%m/%d/%Y %H:%M:%S'))
-  print (conversions[1])
   assert_equal(conversions[1], expected_aud2cad)
 
 def test_transform_timestamp_with_2digit_year():
@@ -32,11 +30,9 @@ def test_transform_timestamp_with_2digit_year():
   assert_equal(2, len(conversions))
 
   expected_usd2cad = currency_conversion.CurrencyConversion('CHARLIE', 'USD', 'CAD', Decimal('1.327'), Decimal('1.3098'), datetime.datetime.strptime('8/29/2015 06:03:56', '%m/%d/%Y %H:%M:%S'))
-  print (conversions[0])
   assert_equal(conversions[0], expected_usd2cad)
 
   expected_aud2cad = currency_conversion.CurrencyConversion('CHARLIE', 'AUD', 'CAD', Decimal('0.9555'), Decimal('0.9308'), datetime.datetime.strptime('8/29/2015 06:03:56', '%m/%d/%Y %H:%M:%S'))
-  print (conversions[1])
   assert_equal(conversions[1], expected_aud2cad)
 
 # TODO: configuration for tests is required
