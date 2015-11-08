@@ -47,6 +47,7 @@ From the project root run
 
 # Access database
 
-```su timofeya
+```
+su timofeya
 psql -p 5434  -d xe
 ```
